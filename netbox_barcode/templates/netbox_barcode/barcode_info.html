@@ -1,0 +1,71 @@
+<style type="text/css">
+  #printableArea {
+    font-size: 18px;
+  }
+
+  #bar_title {
+    text-align: center;
+  }
+
+  #bar_title .btn_wd {
+    min-width: 100px;
+    margin: 10px auto;
+  }
+
+  p span {
+    font-weight: bold;
+  }
+
+  .p_text {
+    margin: 5px 0px 5px 20px;
+  }
+
+  html[data-netbox-color-mode=dark] .p_text {
+    margin: 5px 0px 5px 20px;
+  }
+
+  @media print {
+    .p_text {
+      font-size: 18px;
+      margin: 5px 0px 5px 20px;
+    }
+  }
+</style>
+
+<script>
+  function printPageArea(areaID) {
+    var originalContent = document.body.innerHTML;
+    var printContent = document.getElementById(areaID).innerHTML;
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+  }
+</script>
+{% extends 'base/layout.html' %}
+
+{% block header %}
+<div id="bar_title">
+  <h2>Информация по баркоду</h2>
+  <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn_wd">Print</a>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div id="printableArea">
+  {% include 'netbox_barcode/netcube.html' %}
+  {% if partnumber %}
+  <p class="p_text"><span>Актикул производителя:</span> {{ partnumber }} </p>
+  <img src="{{ barcode_partnumber.url }}" alt='barcode_partnumber'>
+  {% endif %}
+  {% if sn %}
+  <p class="p_text"><span>Серийный номер:</span> {{ sn }} </p>
+  <img src="{{ barcode_sn.url }}" alt='barcode_sn'>
+  {% endif %}
+  {% if stock_number %}
+  <p class="p_text"><span>Складской номер:</span> {{ stock_number }} </p>
+  <img src="{{ barcode_stocknumber.url }}" alt='barcode_stocknumber'>
+  {% endif %}
+  <p class="p_text"><span>Кол-во:</span> 1 </p>
+  <p class="p_text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
+</div>
+{% endblock content %}

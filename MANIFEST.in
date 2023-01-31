@@ -1,0 +1,2 @@
+recursive-include netbox_barcode/templates *.html
+recursive-include netbox_barcode/migrations *.py
