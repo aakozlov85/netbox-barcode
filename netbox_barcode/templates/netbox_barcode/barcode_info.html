@@ -52,7 +52,7 @@
 
 {% block content %}
 <div id="printableArea">
-  {% include 'netbox_barcode/netcube.html' %}
+  {% include 'netbox_barcode/company_info.html' %}
   {% if partnumber %}
   <p class="p_text"><span>Актикул производителя:</span> {{ partnumber }} </p>
   <img src="{{ barcode_partnumber.url }}" alt='barcode_partnumber'>

@@ -13,6 +13,7 @@
 
 ## Скриншоты
 ![Device Barcode Button](docs/img/netbox_device_button.jpg)
+![Device Barcode Info](docs/img/netbox_device_barcode_info.jpg)
 ![Device Barcode Admin Menu](docs/img/netbox_admin1.jpg)
 ![Device Barcode Admin Menu](docs/img/netbox_admin2.jpg)
 ![Device Barcode Admin Menu](docs/img/netbox_admin3.jpg)
@@ -22,7 +23,7 @@
 1. Клонируте репозиторий на сервер с устновленным netbox
 ```
 	cd /
-	git clone git@github.com:aakozlov85/netbox-barcode.git
+	git clone https://github.com/aakozlov85/netbox-barcode.git
 ```
 2. Активируйте виртуальное окружение и установите зависимости из requirements_barcode.txt
 ```
@@ -56,3 +57,15 @@ python3 manage.py migrate
 systemctl restart netbox netbox-rq
 systemctl status netbox netbox-rq
 ```
+9. Добавите в БД кастомное поле для dcim.devices (Other - Custom Fields)
+```
+Name - Stock_number
+Label - Складской номер
+Type - Text
+Description - Складской номер для отдела логистики
+Required - False
+```
+
+### Кастомизация информации
+
+Данные по компании могут быть изменены в шаблоне company_info.html.
