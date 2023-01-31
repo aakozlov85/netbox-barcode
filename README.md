@@ -20,7 +20,7 @@
 
 ## Установка плагина
 
-1. Клонируте репозиторий на сервер с устновленным netbox
+1. Клонируйте репозиторий на сервер с установленным netbox
 ```
 	cd /
 	git clone https://github.com/aakozlov85/netbox-barcode.git
@@ -35,7 +35,7 @@
 	cd /netbox-barcode
 	python3 setup.py install
 ```
-4.  Скорректируте секцию PLUGINS в файле конфигураций configuration.py и включите режим разработчика для выполнения миграций.
+4.  Скорректируйте секцию PLUGINS в файле конфигураций configuration.py и включите режим разработчика для выполнения миграций.
 `
 nano /opt/netbox/netbox/netbox/configuration.py
 `
