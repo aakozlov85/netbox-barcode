@@ -57,7 +57,7 @@ python3 manage.py migrate
 systemctl restart netbox netbox-rq
 systemctl status netbox netbox-rq
 ```
-9. Добавите в БД кастомное поле для dcim.devices (Other - Custom Fields)
+9. Добавьте в Netbox кастомное поле для dcim.devices (Other - Custom Fields)
 ```
 Name - Stock_number
 Label - Складской номер
