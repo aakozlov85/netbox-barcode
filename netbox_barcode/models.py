@@ -30,7 +30,7 @@ class BarcodeSnDevice(Barcode):
         on_delete=models.CASCADE,
         related_name='barcode_sn',
     )
-    sn = models.CharField(max_length=15,
+    sn = models.CharField(max_length=30,
                           blank=True,
                           null=True,
                           verbose_name='serial number',
@@ -55,7 +55,7 @@ class BarcodeStockDevice(Barcode):
         on_delete=models.CASCADE,
         related_name='barcode_stock',
     )
-    stock_number = models.CharField(max_length=15,
+    stock_number = models.CharField(max_length=30,
                                     blank=True,
                                     null=True
                                     )
