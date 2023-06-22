@@ -1,3 +1,14 @@
+<style type="text/css">
+  #barcode {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .btn_stl {
+    margin-left: 10px;
+    min-width: 100px;
+  }
+</style>
+
 <div class="card">
     <h5 class="card-header">Barcodes for this device</h5>
   <div class="card-body">
@@ -8,9 +19,29 @@
               <li>складской номер</li>
           </ul>
       </p>
-      <div>
+  </div>
   <div class="card-footer text-end noprint">
-    <a href="{{object_url}}" class="btn btn-primary btn-ex" target="_blank">Barcode info</a>
+    <div id="barcode">
+      <a href="{{object_url}}" class="btn btn-primary btn-sm btn_stl" target="_blank">
+        Barcode info
+      </a>
+      <form action="{{object_url_changelist}}" method="post">
+        {% csrf_token %}
+        {% if object_in_list %}
+        <button type="submit" name="editlist" value="remove" class="btn btn-danger btn-sm btn_stl">
+          <i class="mdi mdi-minus-thick" aria-hidden="true">
+          </i>
+          Remove from Print List
+        </button>
+        {% else %}
+        <button type="submit" name="editlist" value="add" class="btn btn-success btn-sm btn_stl">
+          <i class="mdi mdi-plus-thick" aria-hidden="true">
+          </i>
+          Add to Print List
+        </button>
+        {% endif %}
+      </form>
+    </div>
   </div>
 </div>
 

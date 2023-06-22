@@ -118,7 +118,7 @@ LOGGING = {}
 
 # Setting this to True will permit only authenticated users to access any part of NetBox. By default, anonymous users
 # are permitted to access most data in NetBox (excluding secrets) but not make any changes.
-LOGIN_REQUIRED = False
+LOGIN_REQUIRED = True
 
 # Base URL path if accessing NetBox within a directory. For example, if installed at http://example.com/netbox/, set:
 # BASE_PATH = 'netbox/'
@@ -195,7 +195,7 @@ TIME_ZONE = os.environ.get("TIME_ZONE", "UTC")
 # Date/time formatting. See the following link for supported formats:
 # https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
 DATE_FORMAT = os.environ.get("DATE_FORMAT", "N j, Y")
-SHORT_DATE_FORMAT = os.environ.get("SHORT_DATE_FORMAT", "Y-m-d")
+SHORT_DATE_FORMAT = os.environ.get("SHORT_DATE_FORMAT", "d.m.Y")
 TIME_FORMAT = os.environ.get("TIME_FORMAT", "g:i a")
 SHORT_TIME_FORMAT = os.environ.get("SHORT_TIME_FORMAT", "H:i:s")
 DATETIME_FORMAT = os.environ.get("DATETIME_FORMAT", "N j, Y g:i a")

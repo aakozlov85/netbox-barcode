@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import (BarcodeSnDevice,
                      BarcodeStockDevice,
-                     BarcodePartNumber
+                     BarcodePartNumber,
+                     BarcodeList,
                      )
 
 
@@ -24,9 +25,17 @@ class deviceStockAdmin(admin.ModelAdmin):
 
 
 @admin.register(BarcodePartNumber)
-class deviceStockAdmin(admin.ModelAdmin):
+class devicePartAdmin(admin.ModelAdmin):
     def device_type(self, obj):
         return obj.device_type.model
     readonly_fields = ('barcode', 'image_tag')
     list_display = ('pk', 'device_type', 'part_number', 'barcode')
     search_fields = ('part_number',)
+
+@admin.register(BarcodeList)
+class deviceListAdmin(admin.ModelAdmin):
+    def device_type(self, obj):
+        return obj.device.device_type.model
+    def serial_number(self, obj):
+        return obj.device.serial
+    list_display = ('pk', 'serial_number', 'device_type')

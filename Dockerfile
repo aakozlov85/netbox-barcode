@@ -1,6 +1,6 @@
 FROM python:3.10
 
-ARG netbox_ver=develop
+ARG netbox_ver=v3.4.8
 
 RUN pip install --upgrade pip
 

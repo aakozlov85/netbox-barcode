@@ -1,0 +1,33 @@
+{% extends 'base/layout.html' %}
+{% comment %} {% load render_table from django_tables2 %} {% endcomment %}
+
+{% block header %}
+<div id="bar_title">
+  <h2>Таблица перечня устройств для печати баркодов</h2>
+</div>
+{% endblock header %}
+
+{% block content %}
+
+  <div class=" card card-body">
+    <div class="table table-hover object-list">
+      {% for device in devices %}
+      {{device.name}}
+      {{device.serial}}
+      {{device.device_type.part_number}}
+      {% comment %} <form action="{{object_url_changelist}}" method="post">
+        {% csrf_token %}
+        <button type="submit" name="editlist" value="remove" class="btn btn-danger btn-sm btn_stl">
+          <i class="mdi mdi-minus-thick" aria-hidden="true">
+          </i>
+          Remove from Print List
+        </button>
+      </form> {% endcomment %}
+      BarcodeListID {{device.barcode_list}}
+      <br>
+      {% endfor %}
+      {% comment %} {% render_table table_barcode %} {% endcomment %}
+    </div>
+  </div>
+
+{% endblock content %}

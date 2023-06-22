@@ -65,7 +65,7 @@
   <p class="p_text"><span>Складской номер:</span> {{ stock_number }} </p>
   <img src="{{ barcode_stocknumber.url }}" alt='barcode_stocknumber'>
   {% endif %}
-  <p class="p_text"><span>Кол-во:</span> 1 </p>
+  <p class="p_text"><span>Кол-во:</span> {{device_count}} </p>
   <p class="p_text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
 </div>
 {% endblock content %}

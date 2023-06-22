@@ -2,6 +2,8 @@ from django.core.files import File
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.html import mark_safe
+# from netbox.models import NetBoxModel
+
 
 from .utils import get_barcode
 
@@ -99,3 +101,15 @@ class BarcodePartNumber(Barcode):
     class Meta:
         verbose_name = "Part Number Barcode"
         verbose_name_plural = "Part Numbers Barcodes"
+
+
+class BarcodeList(models.Model):
+    device = models.OneToOneField(
+        to="dcim.Device",
+        on_delete=models.CASCADE,
+        related_name='barcode_list',
+    )
+
+    class Meta:
+        verbose_name = "Barcode Device List"
+        verbose_name_plural = "Barcode Device Lists"
