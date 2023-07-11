@@ -4,8 +4,8 @@
     justify-content: flex-end;
   }
   .btn_stl {
-    margin-left: 10px;
-    min-width: 100px;
+    margin-left: 10px !important;
+    min-width: 100px !important;
   }
 </style>
 
@@ -29,7 +29,7 @@
         {% csrf_token %}
         {% if object_in_list %}
         <button type="submit" name="editlist" value="remove" class="btn btn-danger btn-sm btn_stl">
-          <i class="mdi mdi-minus-thick" aria-hidden="true">
+          <i class="mdi mdi-trash-can-outline" aria-hidden="true">
           </i>
           Remove from Print List
         </button>

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.urls import path
 
 from . import views
-
+app_name = ''
 urlpatterns = [
     path('netbox_barcode/<int:pk>/', views.DeviceBarcodeIdView.as_view(),
          name='barcode_info'),

@@ -1,15 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import View
+# from django.views.decorators.cache import never_cache
+# from django.utils.decorators import method_decorator
 # from django.http import HttpResponse
 from dcim.models import Device, DeviceType
 
-# from .forms import BarcodeForm
 from .models import BarcodeSnDevice, BarcodeStockDevice, BarcodePartNumber, BarcodeList
 from .utils import count_device_with_bays
-
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import patch_cache_control
-from functools import wraps
+from .tables import BarcodeTable
 
 class DeviceBarcodeIdView(View):
     template_name = 'netbox_barcode/barcode_info.html'
@@ -81,35 +79,23 @@ class DeviceBarcodeIdView(View):
                           'device_count': count_device_with_bays(device),
                       })
 
-def never_ever_cache(decorated_function):
-    """Like Django @never_cache but sets more valid cache disabling headers.
-
-    @never_cache only sets Cache-Control:max-age=0 which is not
-    enough. For example, with max-axe=0 Firefox returns cached results
-    of GET calls when it is restarted.
-    """
-    @wraps(decorated_function)
-    def wrapper(*args, **kwargs):
-        response = decorated_function(*args, **kwargs)
-        patch_cache_control(
-            response, no_cache=True, no_store=True, must_revalidate=True,
-            max_age=0)
-        return response
-    return wrapper
-
 
 class DeviceBarcodePrintView(View):
     # class for bulk print barcodes
     devices = Device.objects.filter(barcode_list__isnull=False)
-    # queryset = BarcodeList.objects.all()
     template_name = 'netbox_barcode/barcode_bulkprint.html'
     
-    @method_decorator(never_ever_cache)
     def get(self, request):
+        table = BarcodeTable(self.devices)
+        table.configure(request)
         return render(
-                request, self.template_name, {"devices": self.devices,}
-            )
-            
+            request, self.template_name, {"table_barcode": table}
+        )
+
+    def post(self, request):
+        if request.POST['editlist'] == 'removeall':
+            BarcodeList.objects.all().delete()
+            return redirect(reverse('plugins:netbox_barcode:barcode_bulkprint'))
 
 
 
@@ -122,5 +108,8 @@ class DeviceBarcodePrintAddRemoveView(View):
             BarcodeList.objects.get_or_create(device=device)
         elif request.POST['editlist'] == 'remove':
             BarcodeList.objects.filter(device=device).delete()
+        elif request.POST['editlist'] == 'removefromtable':
+            BarcodeList.objects.filter(device=device).delete()
+            return redirect(reverse('plugins:netbox_barcode:barcode_bulkprint'))
         return redirect(device.get_absolute_url())
 

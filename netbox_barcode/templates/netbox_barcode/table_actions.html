@@ -1,0 +1,8 @@
+<form action="{% url 'plugins:netbox_barcode:barcode_change_list' record.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="editlist" value="removefromtable" class="btn btn-danger btn-sm">
+      <i class="mdi mdi-trash-can-outline" aria-hidden="true">
+      </i>
+      Delete from List
+    </button>
+  </form>
