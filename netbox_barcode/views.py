@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import View
-# from django.views.decorators.cache import never_cache
-# from django.utils.decorators import method_decorator
-# from django.http import HttpResponse
 from dcim.models import Device, DeviceType
+# from netbox.views import generic
 
 from .models import BarcodeSnDevice, BarcodeStockDevice, BarcodePartNumber, BarcodeList
 from .utils import count_device_with_bays
 from .tables import BarcodeTable
+from .forms import BarcodeForm
+
 
 class DeviceBarcodeIdView(View):
     template_name = 'netbox_barcode/barcode_info.html'
@@ -61,7 +61,8 @@ class DeviceBarcodeIdView(View):
                 else:
                     BarcodePartNumber.objects.filter(
                         device_type=devicetype).update(part_number=partnumber)
-                    BarcodePartNumber.objects.get(device_type=devicetype).save()
+                    BarcodePartNumber.objects.get(
+                        device_type=devicetype).save()
                     barcode_partnumber = BarcodePartNumber.objects.get(
                         device_type=devicetype).barcode
             except DeviceType.barcode_pn.RelatedObjectDoesNotExist:
@@ -84,7 +85,7 @@ class DeviceBarcodePrintView(View):
     # class for bulk print barcodes
     devices = Device.objects.filter(barcode_list__isnull=False)
     template_name = 'netbox_barcode/barcode_bulkprint.html'
-    
+
     def get(self, request):
         table = BarcodeTable(self.devices)
         table.configure(request)
@@ -98,10 +99,9 @@ class DeviceBarcodePrintView(View):
             return redirect(reverse('plugins:netbox_barcode:barcode_bulkprint'))
 
 
-
 class DeviceBarcodePrintAddRemoveView(View):
-    # class for bulk add or remove barcodes list from device page
-    
+    # class for add or remove barcodes list items
+
     def post(self, request, pk):
         device = get_object_or_404(Device, id=pk)
         if request.POST['editlist'] == 'add':
@@ -113,3 +113,24 @@ class DeviceBarcodePrintAddRemoveView(View):
             return redirect(reverse('plugins:netbox_barcode:barcode_bulkprint'))
         return redirect(device.get_absolute_url())
 
+
+class DeviceBarcodeTableAddView(View):
+    # class to add device to barcode bulk table form
+
+    template_name = 'netbox_barcode/addform.html'
+    form = BarcodeForm()
+
+    def get(self, request):
+        return render(
+            request, self.template_name, {"form": self.form}
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = BarcodeForm(request.POST)
+        if form.is_valid():
+            device = form.cleaned_data['device']
+            form.save()
+            return redirect(reverse('plugins:netbox_barcode:barcode_bulkprint'))
+        return render(
+            request, self.template_name, {"form": form}
+        )

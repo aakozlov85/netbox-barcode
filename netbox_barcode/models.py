@@ -2,10 +2,11 @@ from django.core.files import File
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.html import mark_safe
-# from netbox.models import NetBoxModel
 
 
 from .utils import get_barcode
+
+
 
 class Barcode(models.Model):
 
@@ -22,6 +23,7 @@ class Barcode(models.Model):
 
     class Meta:
         abstract = True
+
 
 
 class BarcodeSnDevice(Barcode):
@@ -49,6 +51,7 @@ class BarcodeSnDevice(Barcode):
         verbose_name_plural = "Serial Number Barcodes"
 
 
+
 class BarcodeStockDevice(Barcode):
     """Model for barcode Stock number."""
 
@@ -74,6 +77,7 @@ class BarcodeStockDevice(Barcode):
     class Meta:
         verbose_name = "Stock Number Barcode"
         verbose_name_plural = "Stock Number Barcodes"
+
 
 
 class BarcodePartNumber(Barcode):

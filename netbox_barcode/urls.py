@@ -11,6 +11,8 @@ urlpatterns = [
          name='barcode_change_list'),
     path('netbox_barcode/bulkprint', views.DeviceBarcodePrintView.as_view(),
          name='barcode_bulkprint'),
+    path('netbox_barcode/addform', views.DeviceBarcodeTableAddView.as_view(),
+         name='barcode_addform'),
 ]
 
 # if settings.DEBUG:

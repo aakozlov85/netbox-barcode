@@ -1,0 +1,29 @@
+<style type="text/css">
+  .barcode-title {
+    padding: 0 16px 0 16px;
+      }
+  /* .ss-single-selected, .ss-content {
+    max-width: 30%;
+  } */
+  .errorlist {
+    color: red;
+  }
+  </style>
+
+{% extends 'base/layout.html' %}
+
+{% block header %}
+<h1 class="barcode-title h2 w-100"> Add device to list </h1>
+{% endblock header %}
+
+{% block content %}
+    <form method="POST" class="post-form">{% csrf_token %}
+        {% for field in form %}
+            {{ field }}
+            <span class='errorlist'> {{ field.errors }} </span>
+            {{ field.help_text }}
+        {% endfor %}
+    </br>
+        <button type="submit" class="btn btn-sm btn-success">Add</button>
+    </form>
+{% endblock %}

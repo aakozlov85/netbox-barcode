@@ -1,28 +1,23 @@
 <style type="text/css">
   .barcode-header {
     display: flex;
-    /* align-items: flex-start; */
     justify-content: space-between;
   }
   .barcode-title {
     padding: 0 16px 0 16px;
   }
   .barcode-btn-right {
-    /* justify-content: space-between; */
     display: flex;
-    /* min-width: 25%; */
     align-content: space-evenly;
   }
   .barcode-btn {
     margin: 8px 16px 8px 0 !important;
-    /* align-self: flex-end; */
-    /* background-color: transparent !important; */
   }
-  .barcode-table th {
+  .barcode-btn-remove {
+    margin-top: 14px;
+  }
+  .barcode-table th, .barcode-table td {
     text-align: center !important;
-  }
-  .barcode-table td {
-    text-align: center;
   }
 </style>
 
@@ -32,11 +27,11 @@
 {% block header %}
   <div class="barcode-header">
     <div>
-      <h1  class="barcode-title h2 w-100">Barcode Bulk Print</h1>
+      <h1  class="barcode-title h2 w-100">Barcode Bulk Print List</h1>
     </div>
     <div class="barcode-btn-right">
       <div>
-        <a href="#" type="button" class="btn btn-sm btn-success barcode-btn">
+        <a href="{% url 'plugins:netbox_barcode:barcode_addform' %}" type="button" class="btn btn-sm btn-success barcode-btn">
           <i class="mdi mdi-plus-thick"></i> Add Device
         </a>
       </div>

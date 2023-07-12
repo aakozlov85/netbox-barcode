@@ -9,9 +9,10 @@ class BarcodeTable(NetBoxTable):
     )
     serial = tables.Column()
     device_type = tables.Column()
+    partnumber = tables.Column(accessor='device_type.part_number')
     actions = tables.TemplateColumn(verbose_name='Action',
                                     template_name='netbox_barcode/table_actions.html', orderable=False)
 
     class Meta(NetBoxTable.Meta):
         model = Device
-        fields = ('name', 'serial', 'device_type')
+        fields = ('name', 'serial', 'device_type', 'partnumber')
