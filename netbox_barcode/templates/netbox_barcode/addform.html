@@ -17,8 +17,9 @@
 {% endblock header %}
 
 {% block content %}
-    <form method="POST" class="post-form">{% csrf_token %}
-        {% for field in form %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
             {{ field }}
             <span class='errorlist'> {{ field.errors }} </span>
             {{ field.help_text }}

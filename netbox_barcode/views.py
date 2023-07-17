@@ -128,9 +128,9 @@ class DeviceBarcodeTableAddView(View):
     def post(self, request, *args, **kwargs):
         form = BarcodeForm(request.POST)
         if form.is_valid():
-            device = form.cleaned_data['device']
-            form.save()
+            deviceitems = form.cleaned_data['deviceitems']
+            form.save(deviceitems)
             return redirect(reverse('plugins:netbox_barcode:barcode_bulkprint'))
         return render(
-            request, self.template_name, {"form": form}
+            request, self.template_name, {"form": form, }
         )

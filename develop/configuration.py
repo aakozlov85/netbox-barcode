@@ -1,6 +1,7 @@
 """NetBox configuration file."""
 import os
 
+
 # For reference see http://netbox.readthedocs.io/en/latest/configuration/mandatory-settings/
 # Based on https://github.com/digitalocean/netbox/blob/develop/netbox/netbox/configuration.example.py
 
