@@ -32,11 +32,12 @@
     <div class="barcode-btn-right">
       <div>
         <a href="{% url 'plugins:netbox_barcode:barcode_addform' %}" type="button" class="btn btn-sm btn-success barcode-btn">
-          <i class="mdi mdi-plus-thick"></i> Add Device
+          <i class="mdi mdi-plus-thick"></i>
+          Add Device
         </a>
       </div>
       <div>
-        <form action="{% url 'plugins:netbox_barcode:barcode_bulkprint' %}" method="post">
+        <form action="{% url 'plugins:netbox_barcode:barcode_bulktable' %}" method="post">
           {% csrf_token %}
           <button type="submit" name="editlist" value="removeall" class="btn btn-danger btn-sm barcode-btn">
             <i class="mdi mdi-trash-can-outline" aria-hidden="true">
@@ -56,5 +57,10 @@
       {% render_table table_barcode %}
     </div>
   </div>
-
+  <div>
+    <a href="{% url 'plugins:netbox_barcode:barcode_addform' %}" type="button" class="btn btn-sm btn-success barcode-btn">
+      <i class="mdi mdi-plus-thick"></i>
+      Add Device
+    </a>
+  </div>
 {% endblock content %}

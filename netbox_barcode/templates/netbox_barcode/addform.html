@@ -2,11 +2,16 @@
   .barcode-title {
     padding: 0 16px 0 16px;
       }
-  /* .ss-single-selected, .ss-content {
-    max-width: 30%;
-  } */
+  .ss-single-selected, .ss-content, .ss-multi-selected {
+    max-width: 50%;
+    margin-top: 1%;
+  } 
   .errorlist {
     color: red;
+  }
+  .barcode-btn {
+    min-width: 80px;
+    margin-top: 30px;
   }
   </style>
 
@@ -25,6 +30,8 @@
             {{ field.help_text }}
         {% endfor %}
     </br>
-        <button type="submit" class="btn btn-sm btn-success">Add</button>
+        <button type="submit" class="barcode-btn btn btn-sm btn-success">
+            Add
+        </button>
     </form>
 {% endblock %}

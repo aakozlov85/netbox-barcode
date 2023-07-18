@@ -1,7 +1,6 @@
 from dcim.models import Device
-from netbox.forms import NetBoxModelForm
 from django.forms import ModelForm, ValidationError
-from utilities.forms.fields import DynamicModelChoiceField, DynamicModelMultipleChoiceField
+from utilities.forms.fields import DynamicModelMultipleChoiceField
 from utilities.forms import widgets
 
 from .models import BarcodeList
@@ -10,7 +9,8 @@ from .models import BarcodeList
 class BarcodeForm(ModelForm):
     deviceitems = DynamicModelMultipleChoiceField(
         queryset=Device.objects.all(),
-        help_text="Choose a device to add in list",
+        help_text="Choose devices to add in list",
+        required=True,
     )
 
     class Meta:
@@ -30,8 +30,4 @@ class BarcodeForm(ModelForm):
                 raise ValidationError(f"Device {item} allready in list. "
                                     "Please remove it and choose another one!", code="invalid_choice")
         return data
-
-    # def __init__(self, *args, **kwargs):
-    #     super(BarcodeForm, self).__init__(*args, **kwargs)
-    #     self.fields['device'].initial = [c.pk for c in Device.objects.filter()]
 
