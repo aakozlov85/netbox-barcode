@@ -3,11 +3,11 @@
     font-size: 18px;
   }
 
-  #bar_title {
+  #bar-title {
     text-align: center;
   }
 
-  #bar_title .btn_wd {
+  #bar-title .btn-wd {
     min-width: 100px;
     margin: 10px auto;
   }
@@ -16,16 +16,16 @@
     font-weight: bold;
   }
 
-  .p_text {
+  .p-text {
     margin: 5px 0px 5px 20px;
   }
 
-  html[data-netbox-color-mode=dark] .p_text {
+  html[data-netbox-color-mode=dark] .p-text {
     margin: 5px 0px 5px 20px;
   }
 
   @media print {
-    .p_text {
+    .p-text {
       font-size: 18px;
       margin: 5px 0px 5px 20px;
     }
@@ -44,9 +44,9 @@
 {% extends 'base/layout.html' %}
 
 {% block header %}
-<div id="bar_title">
+<div id="bar-title">
   <h2>Информация по баркоду</h2>
-  <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn_wd">Print</a>
+  <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn-wd">Print</a>
 </div>
 {% endblock header %}
 
@@ -54,18 +54,18 @@
 <div id="printableArea">
   {% include 'netbox_barcode/company_info.html' %}
   {% if partnumber %}
-  <p class="p_text"><span>Актикул производителя:</span> {{ partnumber }} </p>
+  <p class="p-text"><span>Актикул производителя:</span> {{ partnumber }} </p>
   <img src="{{ barcode_partnumber.url }}" alt='barcode_partnumber'>
   {% endif %}
   {% if sn %}
-  <p class="p_text"><span>Серийный номер:</span> {{ sn }} </p>
+  <p class="p-text"><span>Серийный номер:</span> {{ sn }} </p>
   <img src="{{ barcode_sn.url }}" alt='barcode_sn'>
   {% endif %}
   {% if stock_number %}
-  <p class="p_text"><span>Складской номер:</span> {{ stock_number }} </p>
+  <p class="p-text"><span>Складской номер:</span> {{ stock_number }} </p>
   <img src="{{ barcode_stocknumber.url }}" alt='barcode_stocknumber'>
   {% endif %}
-  <p class="p_text"><span>Кол-во:</span> {{device_count}} </p>
-  <p class="p_text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
+  <p class="p-text"><span>Кол-во:</span> {{device_count}} </p>
+  <p class="p-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
 </div>
 {% endblock content %}
