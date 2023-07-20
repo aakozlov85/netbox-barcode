@@ -19,6 +19,10 @@
   .barcode-table th, .barcode-table td {
     text-align: center !important;
   }
+  .barcode-get-all {
+    text-align: center;
+  }
+
 </style>
 
 {% extends 'base/layout.html' %}
@@ -31,7 +35,7 @@
     </div>
     <div class="barcode-btn-right">
       <div>
-        <a href="{% url 'plugins:netbox_barcode:barcode_addform' %}" type="button" class="btn btn-sm btn-success barcode-btn">
+        <a href="{% url 'plugins:netbox_barcode:barcode_addform' %}" type="button" class="btn btn-success barcode-btn">
           <i class="mdi mdi-plus-thick"></i>
           Add Device
         </a>
@@ -39,7 +43,7 @@
       <div>
         <form action="{% url 'plugins:netbox_barcode:barcode_bulktable' %}" method="post">
           {% csrf_token %}
-          <button type="submit" name="editlist" value="removeall" class="btn btn-danger btn-sm barcode-btn">
+          <button type="submit" name="editlist" value="removeall" class="btn btn-danger barcode-btn">
             <i class="mdi mdi-trash-can-outline" aria-hidden="true">
             </i>
             Erase table
@@ -57,10 +61,9 @@
       {% render_table table_barcode %}
     </div>
   </div>
-  <div>
-    <a href="{% url 'plugins:netbox_barcode:barcode_addform' %}" type="button" class="btn btn-sm btn-success barcode-btn">
-      <i class="mdi mdi-plus-thick"></i>
-      Add Device
+  <div class="barcode-get-all">
+    <a href="{% url 'plugins:netbox_barcode:barcode_info_bulk' %}" type="button" class="btn btn-outline-primary ">
+      Get barcodes for this list
     </a>
   </div>
 {% endblock content %}

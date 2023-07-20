@@ -8,7 +8,7 @@ import netbox_barcode.models as md
 barcode_quality = {
     'font_size': 0,
     'quiet_zone': 2.0,
-    'module_height': 9.0,
+    'module_height': 5.0,
     'text_distance': 5.0,
     'dpi': 260,
 }

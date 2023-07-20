@@ -12,6 +12,6 @@ urlpatterns = [
          name='barcode_bulktable'),
     path('netbox_barcode/addform', views.DeviceBarcodeTableAddView.as_view(),
          name='barcode_addform'),
-#     path('netbox_barcode/barcode_info_bulk/', views.DeviceBarcodePrintView.as_view(),
-#          name='barcode_bulkprint'),
+    path('netbox_barcode/barcode_info_bulk/', views.DeviceBarcodePrintView.as_view(),
+         name='barcode_info_bulk'),
 ]

@@ -18,7 +18,7 @@ class DeviceBarcodeIdView(View):
 
 
 class DeviceBarcodeBulkTableView(View):
-    # class for bulk print barcodes
+    # class for bulk print barcodes table
     devices = Device.objects.filter(barcode_list__isnull=False)
     template_name = 'netbox_barcode/barcode_bulktable.html'
 
@@ -69,4 +69,17 @@ class DeviceBarcodeTableAddView(View):
             return redirect(reverse('plugins:netbox_barcode:barcode_bulktable'))
         return render(
             request, self.template_name, {"form": form, }
+        )
+
+class DeviceBarcodePrintView(View):
+    # class for bulk print barcodes info
+
+    devices = Device.objects.filter(barcode_list__isnull=False)
+    template_name = 'netbox_barcode/barcode_bulk_info.html'
+
+    def get(self, request):
+        for item in self.devices:
+            get_barcode_data(item)
+        return render(
+            request, self.template_name, {"devices": self.devices}
         )
