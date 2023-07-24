@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='netbox-barcode',
-    version='0.1',
+    version='0.3',
     description='barcode plugin for netbox devices',
     author='Andrey Kozlov',
     author_email='kozlov@netcube.ru',
