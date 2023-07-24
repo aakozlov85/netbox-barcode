@@ -8,12 +8,16 @@
 - серийный номер;
 - складской номер (дополнительное кастомное поле netbox);
 - партномер устройства.
+Также доступен функционал пакетной генерации баркодов.
 
 `Проверен на netbox версии 3.3.5 и выше`
 
 ## Скриншоты
 ![Device Barcode Button](docs/img/netbox_device_button.jpg)
 ![Device Barcode Info](docs/img/netbox_device_barcode_info.jpg)
+![Device Barcode Bulk List](docs/img/netbox_bulk_plist.jpg)
+![Device Barcode Bulk List Add](docs/img/netbox_bulk_add.jpg)
+![Device Barcode Bulk List Info](docs/img/netbox_device_bulk_barcode_info.jpg)
 ![Device Barcode Admin Menu](docs/img/netbox_admin1.jpg)
 ![Device Barcode Admin Menu](docs/img/netbox_admin2.jpg)
 ![Device Barcode Admin Menu](docs/img/netbox_admin3.jpg)

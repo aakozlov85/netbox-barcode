@@ -22,12 +22,11 @@
   .barcode-get-all {
     text-align: center;
   }
-
 </style>
 
 {% extends 'base/layout.html' %}
 {% load render_table from django_tables2 %}
-
+{% block title %}Barcode List{% endblock %}
 {% block header %}
   <div class="barcode-header">
     <div>
@@ -62,7 +61,7 @@
     </div>
   </div>
   <div class="barcode-get-all">
-    <a href="{% url 'plugins:netbox_barcode:barcode_info_bulk' %}" type="button" class="btn btn-outline-primary ">
+    <a href="{% url 'plugins:netbox_barcode:barcode_info_bulk' %}" type="button" class="btn btn-outline-primary" target="_blank">
       Get barcodes for this list
     </a>
   </div>

@@ -9,6 +9,7 @@ from .utils import get_barcode
 
 
 class Barcode(models.Model):
+    """Abstract barcode model."""
 
     barcode = models.ImageField(
         upload_to='image-attachments/barcodes/', blank=True, unique=True)
@@ -108,6 +109,8 @@ class BarcodePartNumber(Barcode):
 
 
 class BarcodeList(models.Model):
+    """Model for barcode list."""
+
     device = models.OneToOneField(
         to="dcim.Device",
         on_delete=models.CASCADE,

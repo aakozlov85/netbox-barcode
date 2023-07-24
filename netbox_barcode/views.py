@@ -9,6 +9,7 @@ from .forms import BarcodeForm
 
 
 class DeviceBarcodeIdView(View):
+    # class for single device barcode info
     template_name = 'netbox_barcode/barcode_info.html'
 
     def get(self, request, pk):
@@ -52,7 +53,6 @@ class DeviceBarcodePrintAddRemoveView(View):
 
 class DeviceBarcodeTableAddView(View):
     # class to add device to barcode bulk table form
-
     template_name = 'netbox_barcode/addform.html'
     form = BarcodeForm()
 
@@ -73,13 +73,12 @@ class DeviceBarcodeTableAddView(View):
 
 class DeviceBarcodePrintView(View):
     # class for bulk print barcodes info
-
-    devices = Device.objects.filter(barcode_list__isnull=False)
     template_name = 'netbox_barcode/barcode_bulk_info.html'
 
     def get(self, request):
-        for item in self.devices:
+        devices = Device.objects.filter(barcode_list__isnull=False)
+        for item in devices:
             get_barcode_data(item)
         return render(
-            request, self.template_name, {"devices": self.devices}
+            request, self.template_name, {"devices": devices}
         )
