@@ -25,6 +25,15 @@
     margin: 5px 0px 5px 20px;
   }
 
+  #title-vertical {
+    margin: 0 auto;
+  }
+
+  .vertical th, .vertical td{
+    display: flex;
+    flex-direction: column;
+}
+
   @media print {
     .p-text {
       font-size: 18px;
@@ -37,9 +46,24 @@
   function printPageArea(areaID) {
     var originalContent = document.body.innerHTML;
     var printContent = document.getElementById(areaID).innerHTML;
+    var originalchbox = document.getElementById('flexSwitchCheckDefault').checked;
     document.body.innerHTML = printContent;
     window.print();
     document.body.innerHTML = originalContent;
+    document.getElementById('flexSwitchCheckDefault').checked = originalchbox
+  }
+</script>
+
+<script>
+function VerticalAlligment() {
+    var barcodetable = document.getElementById('barcodetable');
+    var chbox = document.getElementById('flexSwitchCheckDefault');
+    if (chbox.checked){
+      barcodetable.classList.add("vertical");
+    }
+    else{
+      barcodetable.classList.remove("vertical");
+    }
   }
 </script>
 
@@ -51,25 +75,29 @@
   <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn-wd">Print</a>
   <a href="javascript:void(0);" onclick="printPageArea('printableAreaNoCompany')" class="btn btn-sm btn-success btn-wd">Print w/o Company Info</a>
 </div>
+<div class="form-check form-switch" id="title-vertical">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="VerticalAlligment()">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Vertical barcode orientation</label>
+</div>
 {% endblock header %}
 {% block content %}
 <div id="printableArea">
 {% include 'netbox_barcode/company_info.html' %}
   <div id="printableAreaNoCompany">
-    <table>
+    <table id="barcodetable">
       {% for item in devices %}
       <tr>
         <td>
           {% if item.device_type.barcode_pn %}
             <p class="p-text"><span>Артикул производителя:</span> {{ item.device_type.barcode_pn.part_number}} </p>
-            <img style="visibility: visible; display: block;" src="{{ item.device_type.barcode_pn.barcode.url }}" alt='barcode_partnumber'>
+            <img src="{{ item.device_type.barcode_pn.barcode.url }}" alt='barcode_partnumber'>
           {% endif %}
         </td>
         <td></td>
         <td>
           {% if item.barcode_sn %}
             <p class="p-text"><span>Серийный номер:</span> {{ item.barcode_sn.sn }} </p>
-            <img style="visibility: visible; display: block;" src="{{ item.barcode_sn.barcode.url }}" alt='barcode_sn'>
+            <img src="{{ item.barcode_sn.barcode.url }}" alt='barcode_sn'>
           {% endif %}
         </td>
       </tr>
