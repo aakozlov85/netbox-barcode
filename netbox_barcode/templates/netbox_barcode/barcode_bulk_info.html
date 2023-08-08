@@ -29,10 +29,20 @@
     margin: 0 auto;
   }
 
-  .vertical th, .vertical td{
+  .vertical tr,
+  .vertical td {
     display: flex;
     flex-direction: column;
-}
+  }
+
+  .image {
+    flex-shrink: 0;
+  }
+
+  img {
+    width: 100%;
+    max-height: 71px;
+  }
 
   @media print {
     .p-text {
@@ -55,13 +65,13 @@
 </script>
 
 <script>
-function VerticalAlligment() {
+  function VerticalAlligment() {
     var barcodetable = document.getElementById('barcodetable');
     var chbox = document.getElementById('flexSwitchCheckDefault');
-    if (chbox.checked){
+    if (chbox.checked) {
       barcodetable.classList.add("vertical");
     }
-    else{
+    else {
       barcodetable.classList.remove("vertical");
     }
   }
@@ -70,41 +80,46 @@ function VerticalAlligment() {
 {% extends 'base/layout.html' %}
 {% block title %}Barcode List Print View{% endblock %}
 {% block header %}
-<div id="bar-title">
-  <h2>Информация по баркодам для выбранных устройств</h2>
-  <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn-wd">Print</a>
-  <a href="javascript:void(0);" onclick="printPageArea('printableAreaNoCompany')" class="btn btn-sm btn-success btn-wd">Print w/o Company Info</a>
-</div>
-<div class="form-check form-switch" id="title-vertical">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="VerticalAlligment()">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Vertical barcode orientation</label>
-</div>
+  <div id="bar-title">
+    <h2>Информация по баркодам для выбранных устройств</h2>
+    <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn-wd">Print</a>
+    <a href="javascript:void(0);" onclick="printPageArea('printableAreaNoCompany')"
+      class="btn btn-sm btn-success btn-wd">Print w/o Company Info</a>
+  </div>
+  <div class="form-check form-switch" id="title-vertical">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="VerticalAlligment()">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Vertical barcode orientation</label>
+  </div>
 {% endblock header %}
 {% block content %}
-<div id="printableArea">
-{% include 'netbox_barcode/company_info.html' %}
-  <div id="printableAreaNoCompany">
-    <table id="barcodetable">
-      {% for item in devices %}
-      <tr>
-        <td>
-          {% if item.device_type.barcode_pn %}
+  <div id="printableArea">
+    {% include 'netbox_barcode/company_info.html' %}
+    <div id="printableAreaNoCompany">
+      <table id="barcodetable">
+        {% for item in devices %}
+        <tr>
+          <td>
+            {% if item.device_type.barcode_pn %}
             <p class="p-text"><span>Артикул производителя:</span> {{ item.device_type.barcode_pn.part_number}} </p>
-            <img src="{{ item.device_type.barcode_pn.barcode.url }}" alt='barcode_partnumber'>
-          {% endif %}
-        </td>
-        <td></td>
-        <td>
-          {% if item.barcode_sn %}
+            <div class="image">
+              <img src="{{ item.device_type.barcode_pn.barcode.url }}" alt='barcode_partnumber'>
+            </div>
+            {% endif %}
+          </td>
+          <td></td>
+          <td>
+            {% if item.barcode_sn %}
             <p class="p-text"><span>Серийный номер:</span> {{ item.barcode_sn.sn }} </p>
-            <img src="{{ item.barcode_sn.barcode.url }}" alt='barcode_sn'>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
-    <p class="p-text"><span>Кол-во:</span> {{ devices.count  }} </p>
-    <p class="p-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
+            <div class="image">
+              <img src="{{ item.barcode_sn.barcode.url }}" alt='barcode_sn'>
+            </div>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <p class="p-text"><span>Кол-во:</span> {{ devices.count }} </p>
+      <p class="p-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
+    </div>
   </div>
-</div>
 {% endblock content %}
