@@ -26,7 +26,9 @@
   }
 
   #title-vertical {
-    margin: 0 auto;
+    margin: 10 auto;
+    display: flex;
+    justify-content: center;
   }
 
   .vertical tr,
@@ -82,9 +84,9 @@
 {% block header %}
   <div id="bar-title">
     <h2>Информация по баркодам для выбранных устройств</h2>
-    <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-sm btn-success btn-wd">Print</a>
+    <a href="javascript:void(0);" onclick="printPageArea('printableArea')" class="btn btn-green">Print</a>
     <a href="javascript:void(0);" onclick="printPageArea('printableAreaNoCompany')"
-      class="btn btn-sm btn-success btn-wd">Print w/o Company Info</a>
+      class="btn btn-green">Print w/o Company Info</a>
   </div>
   <div class="form-check form-switch" id="title-vertical">
     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="VerticalAlligment()">
