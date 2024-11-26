@@ -1,6 +1,6 @@
 FROM python:3.10
 
-ARG netbox_ver=v3.4.8
+ARG netbox_ver=v4.1.5
 
 RUN pip install --upgrade pip
 
@@ -16,7 +16,7 @@ RUN git clone --single-branch --branch ${netbox_ver} https://github.com/netbox-c
     pip install -r /opt/netbox/requirements.txt
 
 # Work around https://github.com/rq/django-rq/issues/421
-RUN pip install django-rq==2.3.2
+# RUN pip install django-rq==2.3.2
 
 # -------------------------------------------------------------------------------------
 # Install Netbox Plugin

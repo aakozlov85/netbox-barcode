@@ -7,21 +7,16 @@
     text-align: center;
   }
 
-  #bar-title .btn-wd {
-    min-width: 100px;
-    margin: 10px auto;
-  }
-
   p span {
     font-weight: bold;
   }
 
-  .p-text {
-    margin: 5px 0px 5px 20px;
+  .bar-text {
+    margin-bottom: 5px;
   }
 
-  html[data-netbox-color-mode=dark] .p-text {
-    margin: 5px 0px 5px 20px;
+  html[data-netbox-color-mode=dark] .bar-text {
+    margin-bottom: 5px;
   }
 
   img {
@@ -30,9 +25,10 @@
   }
 
   @media print {
-    .p-text {
+    .bar-text {
       font-size: 18px;
-      margin: 5px 0px 5px 20px;
+      /* margin-top: 5px;
+      margin-bottom: 5px; */
     }
   }
 </style>
@@ -63,19 +59,19 @@
       <tr>
         <td>
         {% if partnumber %}
-        <p class="p-text"><span>Артикул производителя:</span> {{ partnumber }} </p>
+        <p class="bar-text"><span>Артикул производителя:</span> {{ partnumber }} </p>
         <img src="{{ barcode_partnumber.url }}" alt='barcode_partnumber'>
         {% endif %}
         {% if sn %}
-        <p class="p-text"><span>Серийный номер:</span> {{ sn }} </p>
+        <p class="bar-text"><span>Серийный номер:</span> {{ sn }} </p>
         <img src="{{ barcode_sn.url }}" alt='barcode_sn'>
         {% endif %}
         {% if stock_number %}
-        <p class="p-text"><span>Складской номер:</span> {{ stock_number }} </p>
+        <p class="bar-text"><span>Складской номер:</span> {{ stock_number }} </p>
         <img src="{{ barcode_stocknumber.url }}" alt='barcode_stocknumber'>
         {% endif %}
-        <p class="p-text"><span>Кол-во:</span> {{device_count}} </p>
-        <p class="p-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
+        <p class="bar-text"><span>Кол-во:</span> {{device_count}} </p>
+        <p class="bar-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
       </td>
     </tr>
     </table>

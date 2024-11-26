@@ -16,13 +16,12 @@
     font-weight: bold;
   }
 
-  .p-text {
-    margin: 5px 0px 5px 20px;
-    font-size: 18px;
+  .bar-text {
+    margin-bottom: 5px;
   }
 
-  html[data-netbox-color-mode=dark] .p-text {
-    margin: 5px 0px 5px 20px;
+  html[data-netbox-color-mode=dark] .bar-text {
+    margin-bottom: 5px;
   }
 
   #title-vertical {
@@ -47,9 +46,9 @@
   }
 
   @media print {
-    .p-text {
+    .bar-text {
       font-size: 18px;
-      margin: 5px 0px 5px 20px;
+      /* margin: 5px 0px 5px 20px; */
     }
   }
 </style>
@@ -102,7 +101,7 @@
         <tr>
           <td>
             {% if item.device_type.barcode_pn %}
-            <p class="p-text"><span>Артикул производителя:</span> {{ item.device_type.barcode_pn.part_number}} </p>
+            <p class="bar-text"><span>Артикул производителя:</span> {{ item.device_type.barcode_pn.part_number}} </p>
             <div class="image">
               <img src="{{ item.device_type.barcode_pn.barcode.url }}" alt='barcode_partnumber'>
             </div>
@@ -111,7 +110,7 @@
           <td></td>
           <td>
             {% if item.barcode_sn %}
-            <p class="p-text"><span>Серийный номер:</span> {{ item.barcode_sn.sn }} </p>
+            <p class="bar-text"><span>Серийный номер:</span> {{ item.barcode_sn.sn }} </p>
             <div class="image">
               <img src="{{ item.barcode_sn.barcode.url }}" alt='barcode_sn'>
             </div>
@@ -120,8 +119,8 @@
         </tr>
         {% endfor %}
       </table>
-      <p class="p-text"><span>Кол-во:</span> {{ devices.count }} </p>
-      <p class="p-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
+      <p class="bar-text"><span>Кол-во:</span> {{ devices.count }} </p>
+      <p class="bar-text"><span>Дата проверки:</span> {% now "SHORT_DATE_FORMAT" %}</p>
     </div>
   </div>
 {% endblock content %}
